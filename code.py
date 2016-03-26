@@ -162,6 +162,52 @@ def inverse_dict(original):
 
     return ret
 
+class HuffmanCode(object):
+
+    """Encode and decode messages with a constructed Huffman code."""
+
+    def __init__(self, probabilities, digits):
+        """Create the Huffman dictionaries needed for encoding and decoding.
+
+        :probabilities: List of (message, frequency) tuples.
+        :digits: Number of digits to use in the Huffman encoding.
+
+        """
+        self._probabilities = probabilities
+        self.huffman = huffman_nary_dict(probabilities, digits)
+        self.inv_huffman = inverse_dict(self.huffman)
+
+    def encode(self, messages):
+        """Encode each item in `messages` with the stored Huffman code.
+
+        Raises a KeyError if there is a message in `messages` that is not in
+        the inverse Huffman dictionary.
+
+        :messages: List of messages to be encoded.
+        :returns: String of digits that represents Huffman encoding.
+
+        """
+        return "".join(self.inv_huffman[message] for message in messages)
+
+    def decode(self, string):
+        """Decode the given string with the given Huffman dictionary.
+
+        :string: String encoded with an inverse Huffman dictionary.
+        :returns: String.
+
+        """
+
+        decode = ""
+        while string:
+            # Huffman codes are prefix free, so read until we find a code.
+            for index in range(len(string)+1):
+                if string[:index] in self.huffman:
+                    break
+            code = string[:index]
+            decode += self.huffman[code]
+            string = string[index:]
+
+        return decode
 
 if __name__ == "__main__":
     # Do the thing.
