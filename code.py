@@ -136,8 +136,6 @@ def huffman_nary_dict(probabilities, digits):
 
     return decoding_dict
 
-def p(l):
-    print([(n.data, n.key) for n in l])
 
 if __name__ == "__main__":
     # Do the thing.
