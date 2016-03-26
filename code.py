@@ -90,6 +90,9 @@ def huffman_nary_tree(probabilities, digits):
 def huffman_nary_dict(probabilities, digits):
     """Return a dictionary that decodes messages from the nary Huffman tree.
 
+    This gives a method of _decoding_, but not _encoding_. For that, an inverse
+    dictionary will need to be created. See inverse_dict().
+
     :probabilities: List of tuples (symbol, probability) where probability is
                     any floating point and symbol is any object.
     :digits: Integral number of digits to use in the Huffman encoding. Must be
@@ -135,6 +138,29 @@ def huffman_nary_dict(probabilities, digits):
     visit(root, [], decoding_dict)
 
     return decoding_dict
+
+def inverse_dict(original):
+    """Return a dictionary that is the inverse of the original.
+
+    Given the pair original[key] = value, the returned dictionary will give
+    ret[value] = key. It is important to keep two separate dictionaries in case
+    there is key/value collision. Trying to insert a value that matches a key
+    as a key will overwrite the old key.
+
+    Example:
+        original = {"a": "b", "foo": "a"}
+        original["a"] = "foo" # Lost pair {"a": "b"}.
+
+    :original: Dictionary.
+    :returns: Inverse dictionary of `original`.
+
+    """
+    ret = dict()
+
+    for key, value in original.items():
+        ret[value] = key
+
+    return ret
 
 
 if __name__ == "__main__":
