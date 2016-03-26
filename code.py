@@ -35,7 +35,7 @@ def combine_and_replace(nodes, n):
 
     In the contradictory style of Huffman, if any set of nodes were chosen
     except for the first n, then changing a node not in the first n to one that
-    is from the first n would reduce the sum of their keys. thus the smallest
+    is from the first n would reduce the sum of their keys. Thus the smallest
     sum is made from the last n nodes.
 
     :nodes: A list of TreeNodes.
@@ -76,7 +76,7 @@ def huffman_nary_tree(probabilities, digits):
     initial_count = huffman_initial_count(len(probabilities), digits)
     probabilities = combine_and_replace(probabilities, initial_count)
 
-    # If everything is coded correctly, this loop is guarenteed to terminate
+    # If everything is coded correctly, this loop is guaranteed to terminate
     # due to the initial number of messages merged.
     while len(probabilities) != 1:
         # Have to grab `digits` nodes from now on to meet an optimum code requirement.
@@ -103,7 +103,7 @@ def huffman_nary_dict(probabilities, digits):
         ret = ""
         for index in path:
             if index < 0:
-                raise ValueError("Cannot accept negative path indicies (what went wrong?)")
+                raise ValueError("Cannot accept negative path indices (what went wrong?)")
             elif index >= 10:
                 raise ValueError("Cannot currently make digits greater than 9")
 
@@ -113,10 +113,10 @@ def huffman_nary_dict(probabilities, digits):
 
     def visit(node, path, decoding_dict):
         # The goal here is to visit each node, passing the path taken to get there
-        # as well. When we reach a leaf, then we now that we're at a message, so
-        # we can turn the path into digits (in an arbitrary but consistant way) and
+        # as well. When we reach a leaf, then we know that we're at a message, so
+        # we can turn the path into digits (in an arbitrary but consistent way) and
         # add it to the dict.
-        # Here, the "path" is the list of indicies for children that we have to
+        # Here, the "path" is the list of indices for children that we have to
         # access to get to the needed node. In binary, paths would be lists of
         # 0s and 1s.
         # We modify the passed in dictionary, so no returning is needed.
