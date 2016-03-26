@@ -162,6 +162,23 @@ def inverse_dict(original):
 
     return ret
 
+# http://stackoverflow.com/a/2267428
+def baseN(num,b,numerals="0123456789abcdefghijklmnopqrstuvwxyz"):
+    return ((num == 0) and numerals[0]) or (baseN(num // b, b, numerals).lstrip(numerals[0]) + numerals[num % b])
+
+def ascii_encode(string):
+    """Return the 8-bit ascii representation of `string` as a string.
+
+    :string: String.
+    :returns: String.
+
+    """
+    def pad(num):
+        binary = baseN(num, 2)
+        padding = 8 - len(binary)
+        return "0"*padding + binary
+    return "".join(pad(ord(c)) for c in string)
+
 class HuffmanCode(object):
 
     """Encode and decode messages with a constructed Huffman code."""
