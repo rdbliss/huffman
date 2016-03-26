@@ -228,11 +228,20 @@ class HuffmanCode(object):
 
 if __name__ == "__main__":
     # Do the thing.
-    from freq import file_freq
-    freqs = file_freq("test.txt")
+    from freq import str_freq
+    with open("test.txt") as f:
+        in_str = f.read()
 
+    freqs = str_freq(in_str)
     probabilities = list(freqs.items())
-    test = [TreeNode(freq, sym) for (sym, freq) in probabilities]
-    print(probabilities)
+
     root = huffman_nary_tree(probabilities, 2)
-    decoding_dict = huffman_nary_dict(probabilities, 2)
+    huffman2 = HuffmanCode(probabilities, 2)
+    huffman9 = HuffmanCode(probabilities, 9)
+
+    print(huffman9.encode(in_str))
+    print()
+    print(huffman2.encode(in_str))
+    print()
+    print(ascii_encode(in_str))
+    print(huffman9.decode(huffman9.encode(in_str)))
