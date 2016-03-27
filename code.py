@@ -100,6 +100,27 @@ def huffman_nary_tree(probabilities, digits):
 
     return probabilities.pop()
 
+def indicies_to_code(path, digits):
+    """Convert the path into a string.
+
+     We join the indices directly, from most to least significant, keeping
+     leading zeroes.
+     Examples:
+       [1, 2, 3] -> "123"
+       [7, 2, 10] -> "72a"
+       [0, 2, 1] ->  "021"
+    """
+    combination = ""
+    for index in path:
+        if index < 0:
+            raise ValueError("cannot accept negative path indices (what went wrong?)")
+        if index >= digits:
+            raise ValueError("cannot have an index greater than the number of digits!")
+
+        combination += baseN(index, digits)
+
+    return combination
+
 def huffman_nary_dict(probabilities, digits):
     """Return a dictionary that decodes messages from the nary Huffman tree.
 
@@ -115,18 +136,6 @@ def huffman_nary_dict(probabilities, digits):
                message.
 
     """
-    def indicies_to_code(path):
-        ret = ""
-        for index in path:
-            if index < 0:
-                raise ValueError("Cannot accept negative path indices (what went wrong?)")
-            elif index >= 10:
-                raise ValueError("Cannot currently make digits greater than 9")
-
-            ret += str(index)
-
-        return ret
-
     def visit(node, path, decoding_dict):
         # The goal here is to visit each node, passing the path taken to get there
         # as well. When we reach a leaf, then we know that we're at a message, so
@@ -138,7 +147,7 @@ def huffman_nary_dict(probabilities, digits):
         # We modify the passed in dictionary, so no returning is needed.
         # See: https://stackoverflow.com/questions/986006.
         if len(node.children) == 0:
-            code = indicies_to_code(path)
+            code = indicies_to_code(path, digits)
             decoding_dict[code] = node.data
         else:
             for k, child in enumerate(node.children):
