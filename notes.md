@@ -132,3 +132,20 @@ There are a few edge cases that might give pause.
 - $2 \leq N \leq D$
     - If $2 \leq N \leq D$, then $0 \leq N - 2 < D - 1$, so $(N - 2) \bmod (D - 1) = N - 2$.
       Thus $n_0 = 2 + N - 2 = N$.
+
+## Usefulness of non-binary codes
+
+In general, the more digits allowed in a code, the less lower the overall
+average message length will be shorter^[I'm not sure how to prove this, but I
+bet that someone could.]. But in the field of computer communication, this
+doesn't directly translate to shorter messages. Most computers are built around
+binary, meaning that any messages sent in some other base system will have to be
+encoded into binary. So cranking up the digits used might not be helpful all the
+time.
+
+But if we could calculate the length of a base $D$ number in binary, then we
+could take the average length of a message with $D$ digits and maybe see what
+this length would be in binary. I'm thinking that if $avg_D$ is the average
+length with $D$ digits, and if $L(n_D)$ gives the length of a base $D$ number in
+binary, then we could say the length in binary might be $L(\lceil avg_D
+\rceil)$. But I'm not sure. It's an interesting question.
