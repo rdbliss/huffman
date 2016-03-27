@@ -62,15 +62,13 @@ def huffman_nary_tree(probabilities, digits):
     :returns: TreeNode that is the root of the Huffman tree.
 
     """
-    tree = None
-
     # TreeNode does rich comparison on key value (probability), so we can
     # pass this right to sorted().
     probabilities = [TreeNode(freq, symbol) for (symbol, freq) in probabilities]
     probabilities = sorted(probabilities)
 
     if len(probabilities) == 1:
-        return Tree(probabilities[0])
+        return probabilities[0]
 
     # Grab the required first set of messages.
     initial_count = huffman_initial_count(len(probabilities), digits)
@@ -227,7 +225,6 @@ class HuffmanCode(object):
         return decode
 
 if __name__ == "__main__":
-    # Do the thing.
     from freq import str_freq
     with open("test.txt") as f:
         in_str = f.read()
