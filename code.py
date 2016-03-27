@@ -1,5 +1,6 @@
 from tree import TreeNode
 import bisect
+import math
 
 def huffman_initial_count(message_count, digits):
     """
@@ -71,7 +72,9 @@ def huffman_nary_tree(probabilities, digits):
     if len(probabilities) == 1:
         symbol, freq = probabilities[0]
         if freq != 1:
-            print("The probabilities don't sum up to 1...")
+            print("The probabilities sum to {} (!= 1)...".format(freq))
+        if math.isclose(probabilities[0].key, 1.0):
+            print("(but they are close)")
 
         return TreeNode(freq, symbol)
 
@@ -91,7 +94,9 @@ def huffman_nary_tree(probabilities, digits):
         probabilities = combine_and_replace(probabilities, digits)
 
     if probabilities[0].key != 1:
-        print("The probabilities don't sum up to 1...")
+        print("The probabilities sum to {} (!= 1)...".format(probabilities[0].key))
+        if math.isclose(probabilities[0].key, 1.0):
+            print("(but they are close)")
 
     return probabilities.pop()
 
