@@ -36,11 +36,11 @@ def combine_and_replace(nodes, n):
     In the contradictory style of Huffman, if any set of nodes were chosen
     except for the first n, then changing a node not in the first n to one that
     is from the first n would reduce the sum of their keys. Thus the smallest
-    sum is made from the last n nodes.
+    sum is made from the first n nodes.
 
     :nodes: A list of TreeNodes.
     :n: Integer < len(nodes).
-    :returns: High-to-low list that combines the last n nodes into one.
+    :returns: Low-to-high list that combines the last n nodes into one.
 
     """
     group = nodes[:n]
@@ -207,9 +207,9 @@ class HuffmanCode(object):
         return "".join(self.inv_huffman[message] for message in messages)
 
     def decode(self, string):
-        """Decode the given string with the given Huffman dictionary.
+        """Decode the given string with the stored Huffman dictionary.
 
-        :string: String encoded with an inverse Huffman dictionary.
+        :string: String encoded with the stored inverse Huffman dictionary.
         :returns: String.
 
         """
