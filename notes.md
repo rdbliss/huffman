@@ -2,14 +2,16 @@
 
 Here are some notes on Huffman's original paper on his famous codes. To keep
 this document more self contained, here is a rough sketch of Huffman's goal.
+Make sure you read this somewhere that can do Latex with markdown. Pandoc can
+compile it locally.
 
 - We have $N$ messages ($1, 2, 3, \dots, N$) to encode;
 - Define $L(N)$ as the length of message $N$'s code;
-- Define $P(N)$ as the probability of message $N$ occuring;
+- Define $P(N)$ as the probability of message $N$ occurring;
 - Define the average message length as $$\sum_{k=1}^N L(N)P(N)$$
 - Huffman develops a code that minimizes this sum.
 
-## Notes of Derivation of Properties
+## Notes on Derivation of Properties
 
 Huffman derives various properties of an optimal encoding method mostly by
 contradiction. The statements are, "if a code is optimal, then it has property
@@ -26,7 +28,7 @@ the length of a more probable message code. If this requirement were not met,
 then a reduction in average message length could be obtained by interchanging
 the codes."
 
-Symbollically, if $P(k) > P(j)$, then $L(k) \leq L(j)$. Assume to the contrary
+Symbolically, if $P(k) > P(j)$, then $L(k) \leq L(j)$. Assume to the contrary
 that we have an optimal code where $P(k) > P(j)$ but $L(k) > L(j)$. Then, say
 that the average sum of this code is $$avg_1 = S + P(k)L(k) + P(j)L(j),$$ where
 $S$ is the sum of the average terms that do not include $P(k)$, $P(j)$, $L(k)$,
@@ -42,50 +44,30 @@ Later, "if there are several messages with the same probability, then ... the
 codes for these messages may be interchanged in any way without affecting the
 average code length."
 
-Symbollically, if $P(k) = P(j) = P$, then $PL(k) + PL(j) = PL(j) + PL(k)$. This
+Symbolically, if $P(k) = P(j) = P$, then $PL(k) + PL(j) = PL(j) + PL(k)$. This
 follows directly from the commutative law of addition. 
 
-So now assume that the messages are ordered by probability, i.e. $$P(1) \geq
-P(2) \geq \dots P(N).$$ Then, from the property about lengths, we get that
-$$L(1) \leq L(2) \leq \dots \leq L(N).$$
+### Identical $L(N) - 1$ Prefixes
 
-### $L(N) = L(N-1)$
+"[I]n an optimum code, it is necessary that at least two (and no more than $D$)
+of the codes with length $L(N)$ have identical prefixes of order $L(N) - 1$."
 
-__(2016-03-19) Heads up: This explanation isn't right. I don't get this yet. But
-I'm moving on for now.__
+The "no more than $D$" part isn't immediately obvious from the argument. If we
+have messages of length $L(N)$ that have identical prefixes of order $L(N) -
+1$, then the only thing different about them is their final digit. But we only
+have $D \geq 2$ such digits, so there can only be at most $D$ such messages.
+Otherwise we would run out of digits to put into the final place.
 
-The next derived property is that "an ensemble code could assign $q$ more digits
-to the $N$th message than to the $(N-1)$th message. However, the first $L(N-1)$
-digits of the $N$th message must not be used as the code for any other message.
-Thus the additional $q$ digits would serve no useful purpose."
+### All Possible Prefixes Must be Used
 
-To show this, we'll need another property that Huffman shows. An optimal code
-has the additional restriction that no information is needed to find the start
-of a code besides the codes themselves. How Huffman does this is by saying that
-no code can be the _prefix_ of another. That is, one code cannot show up at the
-start of another.
+"[A]ll possible sequences of $L(N) - 1$ digits must be used either as message
+codes, or must have one of their prefixes used as message codes."
 
-Now, from the previous section we know that message $N$ must be at least as long
-as message $N-1$, i.e. $L(N-1) \leq L(N)$. If this message $N$ exists, then from
-the previous property, no code is equal to the first $L(N-1)$ digits of message
-$N$. But if that is the case, why would we add more digits to message $N$ than
-$L(N-1)$? It is already unique, so it must be that for an optimal encoding
-method, $L(N) = L(N-1)$.
-
-Our question for the commentary is then why isn't every message the same length?
-
-## Constructing the Binary Code
-
-Using the five restrictions that Huffman states, he develops a way to construct
-an optimal binary code.
-
-1. No two messages will have identical codes.
-2. No message code will be the prefix of another.
-3. $L(1) \leq L(2) \leq \cdots \leq L(N-1) = L(N)$
-4. At least 2, but not more than $D$, messages with length $L(N)$ will be equal
-   except for their final digits.
-5. Every possible sequence of digits of length $L(N)-1$ must be used as a code
-   or as a prefix to another code.
+This one actually comes some something more general. Every combination of the
+$D$ digits that is shorter than $L(N)$ must be used as a code. Symbolically, if
+we assume that $P(N) > 0$ and there is some unused code of length $l < L(N)$,
+then $lP(N) < L(N)P(N)$. This follows directly from $P(N) > 0$. So no such
+unused code can exist in an optimal code.
 
 # Generalization
 
@@ -141,7 +123,7 @@ There are a few edge cases that might give pause.
     - If $N = 1$, then the single message is already the root node.
 - $D = 1$
     - We excluded this case for a good reason. First, we can't do integer
-      divison by $D - 1 = 0$. Next, a code in the Huffman system cannot be the
+      division by $D - 1 = 0$. Next, a code in the Huffman system cannot be the
       prefix of another. If we only have $1$ as a code, we have to give every
       message a string of ones. Is $111$ one message, two, or three?
 - $D = 2$
