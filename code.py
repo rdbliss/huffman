@@ -190,7 +190,7 @@ class HuffmanCode(object):
         :digits: Number of digits to use in the Huffman encoding.
 
         """
-        self._probabilities = probabilities
+        self.probabilities = probabilities
         self.huffman = huffman_nary_dict(probabilities, digits)
         self.inv_huffman = inverse_dict(self.huffman)
 
