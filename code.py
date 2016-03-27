@@ -62,13 +62,23 @@ def huffman_nary_tree(probabilities, digits):
     :returns: TreeNode that is the root of the Huffman tree.
 
     """
+    if digits <= 1:
+        raise ValueError("must have at least 2 digits!")
+
+    if len(probabilities) == 0:
+        raise ValueError("cannot create a tree with no messages!")
+
+    if len(probabilities) == 1:
+        symbol, freq = probabilities[0]
+        if freq != 1:
+            print("The probabilities don't sum up to 1...")
+
+        return TreeNode(freq, symbol)
+
     # TreeNode does rich comparison on key value (probability), so we can
     # pass this right to sorted().
     probabilities = [TreeNode(freq, symbol) for (symbol, freq) in probabilities]
     probabilities = sorted(probabilities)
-
-    if len(probabilities) == 1:
-        return probabilities[0]
 
     # Grab the required first set of messages.
     initial_count = huffman_initial_count(len(probabilities), digits)
