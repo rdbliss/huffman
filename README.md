@@ -16,11 +16,11 @@ even says that "for n greater than 2, not all sets of source words can
 properly form an n-ary tree for Huffman coding" (2016-03-27). Where this is
 coming from is a bit of a mystery, because Huffman clearly gives a way to
 construct n-ary codes. For more about this, see "Generalization" in
-[notes.pdf](./nodes.pdf).
+[notes.pdf](./notes.pdf).
 
 ## Basic Usage
 
-````
+````python
 import huffman
 import freq
 
@@ -35,7 +35,7 @@ print(ternary_huffman.decode(ternary_huffman.encode(example)))
 
 ## Demo Run
 
-````
+````python
 $ ./demo.py
 The probabilities sum to 1.0000000000000002 (!= 1)...
 (but they are close)
