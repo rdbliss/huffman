@@ -3,6 +3,7 @@
 
 import huffman
 import freq
+import textwrap
 
 with open("./test.txt") as f:
     in_str = f.read()
@@ -18,13 +19,13 @@ binary_encoding = binary_huffman.encode(in_str)
 hexadecimal_encoding = hexadecimal_huffman.encode(in_str)
 
 print("ascii encoding:")
-print(ascii_encoding)
+print(textwrap.fill(ascii_encoding))
 print()
 print("binary encoding:")
-print(binary_encoding)
+print(textwrap.fill(binary_encoding))
 print()
 print("hex encoding:")
-print(hexadecimal_encoding)
+print(textwrap.fill(hexadecimal_encoding))
 print()
 
 print("Decoding hex:")
