@@ -63,7 +63,7 @@ Otherwise we would run out of digits to put into the final place.
 "[A]ll possible sequences of $L(N) - 1$ digits must be used either as message
 codes, or must have one of their prefixes used as message codes."
 
-This one actually comes some something more general. Every combination of the
+This one actually comes from something more general. Every combination of the
 $D$ digits that is shorter than $L(N)$ must be used as a code. Symbolically, if
 we assume that $P(N) > 0$ and there is some unused code of length $l < L(N)$,
 then $lP(N) < L(N)P(N)$. This follows directly from $P(N) > 0$. So no such
