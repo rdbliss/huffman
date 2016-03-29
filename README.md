@@ -35,7 +35,7 @@ print(ternary_huffman.decode(ternary_huffman.encode(example)))
 
 ## Demo Run
 
-````python
+````
 $ ./demo.py
 The probabilities sum to 1.0000000000000002 (!= 1)...
 (but they are close)
