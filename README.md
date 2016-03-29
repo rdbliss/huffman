@@ -16,7 +16,7 @@ even says that "for n greater than 2, not all sets of source words can
 properly form an n-ary tree for Huffman coding" (2016-03-27). Where this is
 coming from is a bit of a mystery, because Huffman clearly gives a way to
 construct n-ary codes. For more about this, see "Generalization" in
-[notes.md](./nodes.md).
+[notes.pdf](./nodes.pdf).
 
 ## Basic Usage
 
